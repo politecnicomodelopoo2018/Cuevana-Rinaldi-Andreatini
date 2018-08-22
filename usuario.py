@@ -8,16 +8,14 @@ class Usuario(object):
     nickName = None
     mail = None
 
-    def altaUsuario(self):
+    def registrarUsuario(self):
         DB().run("INSERT INTO Usuario(idUsuario,nombreUsuario,apellidoUsuario,nickName,contraseña,mail)" +
                  "VALUES ("+str(self.idUsuario)+",'"+self.nombreUsuario+"','"+self.apellidoUsuario+"','" +
                  self.contrasenia+"','"+self.nickName+"','"+self.mail+"');")
 
-    def bajaUsuario(self):
-        DB().run("DELETE FROM Usuario WHERE idUsuario = " + str(self.idUsuario) +";")
+    def modificacionContrasenia(self):
+        DB().run("UPDATE Usuario SET contraseña = '"+self.contrasenia + "';")
 
-    def modificacionUsuario(self):
-        DB().run("UPDATE Usuario SET nombreUsuario = '"+self.nombreUsuario +
-                 "', apellidoUsuario = '"+self.apellidoUsuario +
-                 "', contraseña = '"+self.contrasenia + "',nickName = '"+self.nickName +
-                 "', mail = '"+self.mail + "';")
+    def modificacionNickName(self):
+        DB().run("UPDATE Usuario SET nickName = '"+self.nickName + "';")
+

@@ -10,7 +10,7 @@ class Pelicula(Titulo):
 
     def altaPelicula(self):
         DB().run("INSERT INTO Pelicula(idPelicula,nombrePelicula,linkPelicula,Categoria_idCategoria)" +
-                 "VALUES (" + str(self.idTitulo) + ",'" + self.nombreTitulo + "','" + self.linkPelicula + "','" +
+                 "VALUES (NULL,'" + self.nombreTitulo + "','" + self.linkPelicula + "','" +
                  self.Categoria.idCategoria + "');")
 
     def bajaPelicula(self):
@@ -24,14 +24,14 @@ class Pelicula(Titulo):
 class Serie(Titulo):
     def altaSerie(self):
         DB().run("INSERT INTO Serie(idSerie,nombreSerie,Categoria_idCategoria)" +
-                 "VALUES (" + str(self.idTitulo) + ",'" + self.nombreTitulo + "','" +
-                 self.Categoria.idCategoria + "');")
+                 "VALUES (NULL,'" + self.nombreTitulo + "','" + self.Categoria.idCategoria + "');")
 
     def bajaSerie(self):
             DB().run("DELETE FROM Serie WHERE idSerie = " + str(self.idTitulo) + ";")
 
     def modificacionSerie(self):
-        DB().run("UPDATE Usuario SET Categoria_idCategoria = '" + self.Categoria.idCategoria + "' WHERE idPelicula = " + str(self.idTitulo) + ";")
+        DB().run("UPDATE Usuario SET Categoria_idCategoria = '" + self.Categoria.idCategoria +
+                 "' WHERE idPelicula = " + str(self.idTitulo) + ";")
 
 class Capitulo(object):
     idCapitulo = None
@@ -43,13 +43,14 @@ class Capitulo(object):
 
     def altaCapitulo(self):
         DB().run("INSERT INTO Capitulo(idCapitulo,nombreCapitulo,nroCapitulo,nroTemporada,Serie_idSerie,linkCapitulo)" +
-                 "VALUES (" + str(self.idCapitulo) + ",'" + self.nombreCapitulo + "'," +
-                 str(self.nroCapitulo) + "," + str(self.nroTemporada) + "," + str(self.Serie.idTitulo) + ",'" + self.linkCapitulo + "');")
+                 "VALUES (NULL,'" + self.nombreCapitulo + "'," + str(self.nroCapitulo) + "," + str(self.nroTemporada)  +
+                 "," + str(self.Serie.idTitulo) + ",'" + self.linkCapitulo + "');")
 
     def bajaCapitulo(self):
             DB().run("DELETE FROM Serie WHERE idSerie = " + str(self.idCapitulo) + ";")
 
-    def modificacionCapitulo(self):
-        DB().run("UPDATE Capitulo SET linkCapitulo = '" + self.linkCapitulo + "' WHERE idCapitulo = " + str(self.idCapitulo) + ";")
+    def modificacionLinkCapitulo(self):
+        DB().run("UPDATE Capitulo SET linkCapitulo = '" + self.linkCapitulo + "' WHERE idCapitulo = " +
+                 str(self.idCapitulo) + ";")
 
 
